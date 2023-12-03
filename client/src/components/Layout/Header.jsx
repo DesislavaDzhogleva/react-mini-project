@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useContext } from 'react';
-import AuthContext from "../../contexts/authContext";
+import {AuthProvider} from "../../contexts/authContext";
+import { useAuth } from "../../hooks/useAuth";
 import './Header.css';
 
 export default function Header() {
-    const {
-        isAuth,
-    } = useContext(AuthContext);
+    const { state } = useAuth();
+   
 
     return (
         <header id="header" className="fixed-top d-flex align-items-center">
@@ -19,7 +19,7 @@ export default function Header() {
                             to="/"> EasyEat </Link>
                     </h1>
                 </div>
-                {isAuth && (
+                {state.isAuthenticated && (
                     <div className="nav navbar-nav navbar-right right-menu">
                         <button
                             type="button"

@@ -1,14 +1,10 @@
 import { Link } from "react-router-dom"
-import AuthContext from "../../contexts/authContext";
-import { useContext } from 'react';
 import './TopBar.css';
+import { useAuth } from "../../hooks/useAuth";
 
 export default function TopBar() {
     
-    const {
-        isAuth,
-        username
-    } = useContext(AuthContext);
+    const { state, logout } = useAuth();
 
     return(
         <div id="topbar" className="topbar d-flex align-items-center fixed-top">
@@ -21,18 +17,19 @@ export default function TopBar() {
 
                 <div className="items d-none d-md-flex align-items-center">
                     <ul>
-                        {isAuth && (
+                        {state.isAuthenticated && (
                         <>
                             <li>
-                                Hello, {username}!
+                                Hello, {state.user.username}!
                             </li>
                             <li>
-                                <Link  className="btn-primary" to="/logout">Logout</Link>
+                                <button onClick={logout} className="btn-primary">Logout</button>
+                                {/* <Link  className="btn-primary" to="/logout">Logout</Link> */}
                             </li>
                         </>
                         )}
 
-                        {!isAuth && (
+                        {!state.isAuthenticated && (
                         <>
                             <li>
                                 <Link id="register" to="/Register">Register</Link>

@@ -9,9 +9,7 @@ const buildOptions = (data) => {
     }
 
     const accessToken = localStorage.getItem('accessToken');
-    console.log(accessToken);
     if(accessToken){
-        console.log('nnnn')
         options.headers = {
             ...options.headers,
             'X-Authorization': accessToken

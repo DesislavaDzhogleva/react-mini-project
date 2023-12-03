@@ -4,18 +4,12 @@ export function useForm(initialValues, submitHandler){
     const [values, setValues] = useState(initialValues);
     
     const onChange = (event) => {
-        const { name, value } = event.target;
-        console.log(name, value);
-        console.log(name)
+        const { name, value } = event.currentTarget;
         setValues({...values, [name]: value});
-        console.log(values)
     };
 
     const onSubmit = (event) => {
         event.preventDefault();
-        console.log(values);
-
-      
         submitHandler(values);
     };
 

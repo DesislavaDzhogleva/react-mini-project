@@ -1,18 +1,25 @@
 import * as request from '../libs/requests.js';
 const baseUrl = 'http://localhost:3030/users';
 export const login = async (email, password) => {
-    const result = await request.post(`${baseUrl}/login`, { email, password });
-    console.log(email, password);
-    console.log(result);
-    return result;
-};
+    const user = await request.post(`${baseUrl}/login`, { email, password });
+    console.log(JSON.stringify(user));
 
-export const register = async (email, password,  role) => {
-    const result = await request.post(`${baseUrl}/register`, { email, password, role});
+    localStorage.setItem('accessToken', user.accessToken);
+    return user;
+  };
+
+export const register = async (email, password, role, firstName, lastName) => {
+    console.log('register' + email, password, role, firstName, lastName);
+    const username = email;
+    const result = await request.post(`${baseUrl}/register`, { email, password, role, firstName, lastName, username});
+    console.log(JSON.stringify(result));
+
+    localStorage.setItem('accessToken', result.accessToken);
     return result;
 }
 
 export const logout = async () => {
-    const result = await request.get(`${baseUrl}/logout`);
+    const result = await request.get(`${baseUrl}/logout` );
+    localStorage.removeItem('accessToken');
     return result;
 }
