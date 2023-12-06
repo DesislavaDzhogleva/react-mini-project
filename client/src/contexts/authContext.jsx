@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const initialState = {
   isAuthenticated: false,
   user: null,
+  role: null,
 };
 
 const ACTIONS = {
@@ -20,18 +21,21 @@ const authReducer = (state, action) => {
         ...state,
         isAuthenticated: true,
         user: action.payload,
+        role: action.payload.role,
       };
     case ACTIONS.LOGOUT:
       return {
         ...state,
         isAuthenticated: false,
         user: null,
+        role: null,
       };
     case ACTIONS.REGISTER:
       return {
         ...state,
         isAuthenticated: true,
         user: action.payload,
+        role: action.payload.role,
       };
     default:
       return state;

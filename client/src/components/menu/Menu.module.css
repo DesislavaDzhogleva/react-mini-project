@@ -1,0 +1,17 @@
+.menuItemContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .menuItemContainer .menuItemCard {
+    background-color: #1a1814; 
+    color: #ffffff; 
+    width: 18rem;
+    margin: 1rem;
+    padding: 1rem;
+  }
+ 
+  .menuItemContainer .listItem {
+    background-color: #1a1814;
+    color: #ffffff; 
+  }

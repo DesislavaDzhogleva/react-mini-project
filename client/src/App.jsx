@@ -11,6 +11,9 @@ import Register from './components/users/Register';
 // import Logout from './components/users/Logout';
 import Hero from './components/Hero';
 import * as authService from './services/authService';
+import MenuList from './components/menu/MenuList';
+import CategoriesList from './components/menu/categories/CategoriesList';
+import CreateMenuCategory from './components/menu/categories/CreateCategory';
 
 function App() {
   // const navigate = useNavigate({});
@@ -51,10 +54,16 @@ function App() {
           <div>
             <Hero />
               <main id="main">
+              <MenuList />
+              {/* <CategoriesList /> */}
+                
               <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
+                <Route path='/categories' element={<CategoriesList />}>
+                  <Route path='createCategory' element={<CreateMenuCategory />} />
+                </Route>
                 {/* <Route path='/logout' element={<Logout />} /> */}
               </Routes>
               </main>
