@@ -16,35 +16,7 @@ import CategoriesList from './components/menu/categories/CategoriesList';
 import CreateMenuCategory from './components/menu/categories/CreateCategory';
 
 function App() {
-  // const navigate = useNavigate({});
-  // const { state, authService } = useAuth();
-
-  // const loginSubmitHandler = async (values) => {
-
-  //   const result = await authService.login(values.email, values.password, values.role);
-  //   setAuth(result);
-  //   navigate('/');
-  // };
-
-  // const registerSubmitHandler = async (values) => {
-  //   const result = await authService.register(values.email, values.password);
-   
-  //   setAuth(result);
-  //   localStorage.setItem('accessToken', result.accessToken);
-  //   navigate('/');
-  // };
-
-  // const logoutHandler = async () => {
-  //   const result = await authService.logout();
-  //   setAuth({});
-  //   console.log('logout handler');
-  //   localStorage.removeItem('accessToken');
-  //   navigate('/');
-  // };
-
-
-  // const data = { loginSubmitHandler, registerSubmitHandler, logoutHandler, username: auth.username || auth.email, email: auth.email, isAuth: !!auth.accessToken };
-
+  
   return (
     <>
      <AuthProvider>

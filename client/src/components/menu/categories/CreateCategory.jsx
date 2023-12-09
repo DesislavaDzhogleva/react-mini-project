@@ -1,20 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useNavigate } from 'react-router-dom';
-import { useForm } from '../../../hooks/useForms';
-import * as categoriesService from '../../../services/categoriesService';
 
-function CreateMenuCategory() {
-    const navigate = useNavigate();
-
-    const onCreateCategory = async (values) => {
-        await categoriesService.create(values);
-        // TODO: What about list update after create?
-        navigate('/categories');
-    }
-    const { values, onChange, onSubmit } = useForm({
-        categoryName: "",
-    }, onCreateCategory);
+function CreateMenuCategory({values, onChange, onSubmit}) {
 
     return (
         <Form onSubmit={onSubmit}>

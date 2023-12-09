@@ -1,17 +1,30 @@
 import { useEffect, useState } from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, Route, Routes, useNavigate } from 'react-router-dom';
+import { useForm } from '../../../hooks/useForms';
 import * as categoriesService from '../../../services/categoriesService';
 import styles from './Categories.module.css';
+import CreateMenuCategory from './CreateCategory';
 
 function CategoriesList() {
     const [categories, setCategories] = useState([]);
+    const navigate = useNavigate();
+
+     const onCreateCategory = async (category) => {
+        await categoriesService.create(category)
+            .then(res => setCategories([...categories, res]));
+        navigate('/categories');
+    }
+
+    const { values, onChange, onSubmit } = useForm({
+        categoryName: "",
+    }, onCreateCategory);
+    
 
     useEffect(() => {
         categoriesService.getAll()
             .then(res => setCategories(res))
             .catch(err => console.log(`error in categories - ${err.message}`));
-        console.log('asd');
     }, []);
 
 
@@ -38,7 +51,9 @@ function CategoriesList() {
                 <Link to="createCategory" className={styles.primaryButton}>Create Category</Link>
             </div>
 
-            <Outlet />
+            <Routes>
+                <Route path='createCategory' element={<CreateMenuCategory values={values} onChange={onChange} onSubmit={onSubmit} />} />
+            </Routes>
         </div>
     );
 }
