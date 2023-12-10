@@ -47,9 +47,9 @@ export const AuthContext = createContext();
 
 // Create the AuthProvider component
 export const AuthProvider = ({ children }) => {
-  useEffect(() => {
-    localStorage.removeItem('accessToken');
-  }, []);
+  // useEffect(() => {
+  //   localStorage.removeItem('accessToken');
+  // }, []);
   
   const [state, dispatch] = useReducer(authReducer, initialState);
   const navigate = useNavigate();

@@ -6,14 +6,15 @@ import * as categoriesService from '../../../services/categoriesService';
 import styles from './Categories.module.css';
 import CreateMenuCategory from './CreateCategory';
 import EditMenuCategory from './EditCategory';
+import { useAuth}  from '../../../hooks/useAuth';
 
 function CategoriesList() {
     const [categories, setCategories] = useState([]);
     const navigate = useNavigate();
-    console.log('render');
+    const { state } = useAuth();
 
     useEffect(() => {
-        categoriesService.getAll()
+        categoriesService.getAll(state?.user?._id)
             .then(res => setCategories(res))
             .catch(err => console.log(`error in categories - ${err.message}`));
     }, []);

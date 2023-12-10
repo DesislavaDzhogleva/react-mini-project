@@ -15,6 +15,7 @@ import MenuList from './components/menu/MenuList';
 import CategoriesList from './components/menu/categories/CategoriesList';
 import CreateMenuCategory from './components/menu/categories/CreateCategory';
 import EditMenuCategory from './components/menu/categories/EditCategory';
+import CreateMenuItem from './components/menu/CreateMenuItem';
 
 function App() {
   
@@ -33,6 +34,7 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
+                <Route path='/createMeal' element={<CreateMenuItem />} />
                 <Route path='/categories' element={<CategoriesList />}>
                   {/* TODO: Why do i need these two routes? */}
                   <Route path='createCategory' element={<CreateMenuCategory />} />

@@ -1,7 +1,10 @@
 import * as request from '../libs/requests.js';
-const baseUrl = 'http://localhost:3030/data/mealCategories';
+const baseUrl = 'http://localhost:3030/data/meals';
 export const getAll = async (id) => {
-    
+    // const query = new URLSearchParams({
+    //     load: `owner=ownerId:users`,
+    // });
+
     const query = new URLSearchParams({
         where: `_ownerId="${id}"`,
     });
@@ -11,14 +14,15 @@ export const getAll = async (id) => {
     return result;
 };
 
-export const create = async (mealCategory) => {
-    const result = await request.post(`${baseUrl}`, mealCategory);
+export const create = async (meal) => {
+    console.log(meal.mealImage);
+    const result = await request.post(`${baseUrl}`, meal);
     return result;
 }
 
-export const edit = async (mealCategory) => {
+export const edit = async (meal) => {
 
-    const result = await request.put(`${baseUrl}/${mealCategory._id}`, mealCategory);
+    const result = await request.put(`${baseUrl}/${meal._id}`, meal);
     return result;
 }
 

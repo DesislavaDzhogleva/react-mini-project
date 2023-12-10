@@ -1,6 +1,7 @@
 .menuItemContainer {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
   }
   
   .menuItemContainer .menuItemCard {
@@ -14,4 +15,16 @@
   .menuItemContainer .listItem {
     background-color: #1a1814;
     color: #ffffff; 
+  }
+
+  .menuItemContainer .button {
+    color: #cda45e;
+    text-decoration: none;
+    background: none;
+  }
+
+  .cardImageTop {
+    width: 100%;
+    height: 20vh;
+    object-fit: cover;
   }
