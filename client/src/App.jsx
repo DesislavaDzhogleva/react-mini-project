@@ -14,6 +14,7 @@ import * as authService from './services/authService';
 import MenuList from './components/menu/MenuList';
 import CategoriesList from './components/menu/categories/CategoriesList';
 import CreateMenuCategory from './components/menu/categories/CreateCategory';
+import EditMenuCategory from './components/menu/categories/EditCategory';
 
 function App() {
   
@@ -27,16 +28,16 @@ function App() {
             <Hero />
               <main id="main">
               <MenuList />
-              {/* <CategoriesList /> */}
                 
               <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
                 <Route path='/categories' element={<CategoriesList />}>
+                  {/* TODO: Why do i need these two routes? */}
                   <Route path='createCategory' element={<CreateMenuCategory />} />
+                  <Route path='editCategory/:id' element={<EditMenuCategory />} />
                 </Route>
-                {/* <Route path='/logout' element={<Logout />} /> */}
               </Routes>
               </main>
           </div>

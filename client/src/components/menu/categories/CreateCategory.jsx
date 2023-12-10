@@ -1,8 +1,12 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useForm } from '../../../hooks/useForms';
 
-function CreateMenuCategory({values, onChange, onSubmit}) {
-
+function CreateMenuCategory({onCreateCategory}) {
+    const { values, onChange, onSubmit } = useForm({
+        categoryName: "",
+    }, onCreateCategory);
+    
     return (
         <Form onSubmit={onSubmit}>
             <Form.Group className="mb-3" controlId="formItemName">

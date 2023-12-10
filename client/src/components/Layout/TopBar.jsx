@@ -5,7 +5,7 @@ import { useAuth } from "../../hooks/useAuth";
 export default function TopBar() {
     
     const { state, logout } = useAuth();
-    console.log(state.user.username);
+    console.log(state.user?.username);
     return(
         <div id="topbar" className="topbar d-flex align-items-center fixed-top">
             <div className="container d-flex justify-content-center justify-content-md-between">

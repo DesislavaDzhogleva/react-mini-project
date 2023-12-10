@@ -5,21 +5,12 @@ import { useForm } from '../../../hooks/useForms';
 import * as categoriesService from '../../../services/categoriesService';
 import styles from './Categories.module.css';
 import CreateMenuCategory from './CreateCategory';
+import EditMenuCategory from './EditCategory';
 
 function CategoriesList() {
     const [categories, setCategories] = useState([]);
     const navigate = useNavigate();
-
-     const onCreateCategory = async (category) => {
-        await categoriesService.create(category)
-            .then(res => setCategories([...categories, res]));
-        navigate('/categories');
-    }
-
-    const { values, onChange, onSubmit } = useForm({
-        categoryName: "",
-    }, onCreateCategory);
-    
+    console.log('render');
 
     useEffect(() => {
         categoriesService.getAll()
@@ -27,6 +18,47 @@ function CategoriesList() {
             .catch(err => console.log(`error in categories - ${err.message}`));
     }, []);
 
+    const onCreateCategory2 = async (category) => {
+        await categoriesService.create(category)
+            .then(res => setCategories([...categories, res]));
+        navigate('/categories');
+    }
+
+     const onCreateCategory =  async (category) => {
+        const response = await categoriesService.create(category);
+        setCategories([...categories, response]);
+        navigate('/categories');
+    }
+
+    const onEditCategory = async (e) => {
+        e?.preventDefault();
+
+        const editValues = Object.fromEntries(new FormData(e.currentTarget));
+        const response =  await categoriesService.edit(editValues);
+       
+        setCategories(oldCategories => {
+            const newCategories = oldCategories
+                .map(category => category._id === response._id ? response : category)
+            return newCategories;
+        });
+
+        navigate('/categories');
+    };
+
+    const onDeleteCategory = async (id) => {
+        const hasConfirmed = window.confirm('Are you sure?');
+
+        if(hasConfirmed){
+          await categoriesService.remove(id);
+        
+          setCategories(oldCategories => {
+            const newCategories = oldCategories.filter(category => category._id !== id)
+            return newCategories;
+        });
+
+          navigate('/categories');
+        }
+    }
 
     return (
         <div className={styles.categoriesContainer}>
@@ -38,10 +70,12 @@ function CategoriesList() {
                     </div>
                 </ListGroup.Item>
                 {categories.map((category, index) => (
-                    <ListGroup.Item key={index} className="d-flex justify-content-between">{category.categoryName}
+                    <ListGroup.Item key={index} className="d-flex justify-content-between">{category?.categoryName}
                         <div className="d-flex justify-content-between">
-                            <button className={styles.secondaryButton}>Edit</button>
-                            <button className={styles.secondaryButton}>Delete</button>
+                            <Link to={`editCategory/${category?._id}`} className={styles.secondaryButton}>
+                                Edit
+                            </Link>
+                            <button onClick={() => onDeleteCategory(category._id)} className={styles.secondaryButton}>Delete</button>
                         </div>
                     </ListGroup.Item>
                 ))}
@@ -52,8 +86,10 @@ function CategoriesList() {
             </div>
 
             <Routes>
-                <Route path='createCategory' element={<CreateMenuCategory values={values} onChange={onChange} onSubmit={onSubmit} />} />
+                <Route path='createCategory' element={<CreateMenuCategory onCreateCategory={onCreateCategory} />} />
+                <Route path='editCategory/:id' element={<EditMenuCategory onEditCategory={onEditCategory} />} />
             </Routes>
+            {/* <Outlet /> */}
         </div>
     );
 }
