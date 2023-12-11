@@ -22,11 +22,14 @@ export default function Header() {
                             to="/"> EasyEat </Link>
                     </h1>
                 </div>
-                {/* TODO: Add check for role */}
                 <Nav className="me-auto">
-                    <Link to="/categories" className="nav-link text-white">Categories</Link>
+                    {state.isAuthenticated && state?.user.role === 'Restaurant' && (
+                        <Link to="/categories" className="nav-link text-white">Categories</Link>
+                    )}
+                        <Link to="/menu" className="nav-link text-white">Menu</Link>
                 </Nav>
-                {state.isAuthenticated && (
+
+                {state.isAuthenticated && state?.user.role === 'Client' && (
                     <div className="nav navbar-nav navbar-right right-menu">
                         <button
                             type="button"

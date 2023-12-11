@@ -6,7 +6,8 @@ import * as categoriesService from '../../../services/categoriesService';
 import styles from './Categories.module.css';
 import CreateMenuCategory from './CreateCategory';
 import EditMenuCategory from './EditCategory';
-import { useAuth}  from '../../../hooks/useAuth';
+import { useAuth } from '../../../hooks/useAuth';
+import {Unauthorized} from '../../Unauthorized/Unauthorized';
 
 function CategoriesList() {
     const [categories, setCategories] = useState([]);
@@ -18,12 +19,6 @@ function CategoriesList() {
             .then(res => setCategories(res))
             .catch(err => console.log(`error in categories - ${err.message}`));
     }, []);
-
-    const onCreateCategory2 = async (category) => {
-        await categoriesService.create(category)
-            .then(res => setCategories([...categories, res]));
-        navigate('/categories');
-    }
 
      const onCreateCategory =  async (category) => {
         const response = await categoriesService.create(category);
@@ -62,36 +57,44 @@ function CategoriesList() {
     }
 
     return (
-        <div className={styles.categoriesContainer}>
-            <ListGroup className="d-flex justify-content-between" data-bs-theme="dark">
-                <ListGroup.Item className="d-flex justify-content-between">Test Category
-                    <div className="d-flex justify-content-between">
-                        <button className={styles.secondaryButton}>Edit</button>
-                        <button className={styles.secondaryButton}>Delete</button>
-                    </div>
-                </ListGroup.Item>
-                {categories.map((category, index) => (
-                    <ListGroup.Item key={index} className="d-flex justify-content-between">{category?.categoryName}
-                        <div className="d-flex justify-content-between">
-                            <Link to={`editCategory/${category?._id}`} className={styles.secondaryButton}>
-                                Edit
-                            </Link>
-                            <button onClick={() => onDeleteCategory(category._id)} className={styles.secondaryButton}>Delete</button>
+        <section>
+              {!state.isAuthenticated && (
+                    <Unauthorized />
+                )}
+
+                {state.isAuthenticated && state.user?.role ==='Restaurant' && (
+                        <div className="container">
+                        <ListGroup className="d-flex justify-content-between" data-bs-theme="dark">
+                            <ListGroup.Item className="d-flex justify-content-between">Test Category
+                                <div className="d-flex justify-content-between">
+                                    <button className={styles.secondaryButton}>Edit</button>
+                                    <button className={styles.secondaryButton}>Delete</button>
+                                </div>
+                            </ListGroup.Item>
+                            {categories.map((category, index) => (
+                                <ListGroup.Item key={index} className="d-flex justify-content-between">{category?.categoryName}
+                                    <div className="d-flex justify-content-between">
+                                        <Link to={`editCategory/${category?._id}`} className={styles.secondaryButton}>
+                                            Edit
+                                        </Link>
+                                        <button onClick={() => onDeleteCategory(category._id)} className={styles.secondaryButton}>Delete</button>
+                                    </div>
+                                </ListGroup.Item>
+                            ))}
+                        </ListGroup>
+        
+                        <div className={styles.centeredContainer}>
+                            <Link to="createCategory" className={styles.primaryButton}>Create Category</Link>
                         </div>
-                    </ListGroup.Item>
-                ))}
-            </ListGroup>
-
-            <div className={styles.centeredContainer}>
-                <Link to="createCategory" className={styles.primaryButton}>Create Category</Link>
-            </div>
-
-            <Routes>
-                <Route path='createCategory' element={<CreateMenuCategory onCreateCategory={onCreateCategory} />} />
-                <Route path='editCategory/:id' element={<EditMenuCategory onEditCategory={onEditCategory} />} />
-            </Routes>
-            {/* <Outlet /> */}
-        </div>
+        
+                        <Routes>
+                            <Route path='createCategory' element={<CreateMenuCategory onCreateCategory={onCreateCategory} />} />
+                            <Route path='editCategory/:id' element={<EditMenuCategory onEditCategory={onEditCategory} />} />
+                        </Routes>
+                    </div>
+                )}
+           
+        </section>
     );
 }
 

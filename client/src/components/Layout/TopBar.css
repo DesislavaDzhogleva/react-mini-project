@@ -35,4 +35,10 @@
   .topbar .items ul li + li {
     padding-left: 10px;
   }
+
+  .topbar .link {
+    color: #cda45e;
+    text-decoration: none;
+    background: none;
+  }
   

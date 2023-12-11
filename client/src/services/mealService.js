@@ -9,7 +9,7 @@ export const getAll = async (id) => {
         where: `_ownerId="${id}"`,
     });
 
-    const result = await request.get(`${baseUrl}/?${query}`);
+    const result = await request.get(`${baseUrl}/?${query}&sortBy=_createdOn desc`);
     console.log(result);
     return result;
 };
@@ -21,7 +21,7 @@ export const create = async (meal) => {
 }
 
 export const edit = async (meal) => {
-
+    console.log(meal._id);
     const result = await request.put(`${baseUrl}/${meal._id}`, meal);
     return result;
 }

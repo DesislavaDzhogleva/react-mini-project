@@ -15,13 +15,11 @@ export default function TopBar() {
                     <i className="bi bi-clock d-flex align-items-center ms-4"><span> Mon-Sat: 11AM - 23PM</span></i>
                 </div>
 
-                <div className="items d-none d-md-flex align-items-center">
+                <div className="items d-none d-md-flex align-items-center pt-1">
                     <ul>
                         {state.isAuthenticated && (
                         <>
-                            <li>
-                                Hello, {state.user.username}!
-                            </li>
+                            <button type="button" className="btn btn-link link"> Hello, {state.user.username}!</button>
                             <li>
                                 <button onClick={logout} className="btn-primary">Logout</button>
                                 {/* <Link  className="btn-primary" to="/logout">Logout</Link> */}

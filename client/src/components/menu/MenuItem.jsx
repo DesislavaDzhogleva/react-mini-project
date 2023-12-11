@@ -5,9 +5,12 @@ import Button from 'react-bootstrap/esm/Button';
 import * as categoriesService from '../../services/categoriesService';
 import * as mealService from '../../services/mealService';
 import styles from './Menu.module.css';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
 
-export default function MenuItem({ item, onMealDelete}) {
+export default function MenuItem({ item, onMealDelete }) {
     const [categoryName, setCategoryName] = useState('');
+    const { state } = useAuth();
 
     useEffect(() => {
         categoriesService.getOne(item.categoryId)
@@ -15,13 +18,13 @@ export default function MenuItem({ item, onMealDelete}) {
             .catch(err => console.log(`error in categories - ${err.message}`));
     }, [item.categoryId]);
 
-    
+
 
     return (
         <>
             <div className={styles.menuItemContainer}>
                 <Card className={styles.menuItemCard} style={{ width: '18rem' }}>
-                    <Card.Img  className={styles.cardImageTop} variant="top" src={item.mealImage} />
+                    <Card.Img className={styles.cardImageTop} variant="top" src={item.mealImage} />
                     <Card.Body>
                         <Card.Title>{item.mealName}</Card.Title>
                         <Card.Text>{item.mealDescription}</Card.Text>
@@ -29,12 +32,25 @@ export default function MenuItem({ item, onMealDelete}) {
                     <ListGroup variant="flush">
                         <ListGroup.Item className={styles.listItem}>{categoryName}</ListGroup.Item>
                     </ListGroup>
-                    <Card.Body>
-                        <Card.Link href="#">Edit</Card.Link>
-                        <button onClick={() => onMealDelete(item._id)} className={styles.button}>Delete</button>
-                        <button className={styles.button}>Details</button>
-                    </Card.Body>
-                    <Button variant="primary">Add to cart - {item.mealPrice} lv.</Button>
+                    {state?.user.role === 'Restaurant' && (
+                        <>
+                            <Card.Body>
+                                <Card.Link as={Link} to={`editMeal/${item?._id}`}>
+                                    <button className={styles.button}>Edit</button>
+                                </Card.Link>
+                                <button onClick={() => onMealDelete(item._id)} className={styles.button}>Delete</button>
+                            </Card.Body>
+
+                            <Button className={styles.disabledButton}>Price - {item.mealPrice} lv.</Button>
+                         </>
+
+                    )}
+                    {state?.user.role === 'Client' && (
+                        <>
+                            <Button variant="primary">Add to Cart - {item.mealPrice} lv.</Button>
+                         </>
+
+                    )}
                 </Card>
             </div>
         </>

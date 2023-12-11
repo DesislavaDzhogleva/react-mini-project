@@ -1,6 +1,4 @@
-import { useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import {useAuth} from './hooks/useAuth';
 
 import Header from './components/layout/Header'
 import  { AuthProvider } from './contexts/authContext';
@@ -16,9 +14,10 @@ import CategoriesList from './components/menu/categories/CategoriesList';
 import CreateMenuCategory from './components/menu/categories/CreateCategory';
 import EditMenuCategory from './components/menu/categories/EditCategory';
 import CreateMenuItem from './components/menu/CreateMenuItem';
+import EditMenuItem from './components/menu/EditMenuItem';
 
 function App() {
-  
+
   return (
     <>
      <AuthProvider>
@@ -27,14 +26,17 @@ function App() {
         <section className="inner-page">
           <div>
             <Hero />
-              <main id="main">
-              <MenuList />
-                
+              <main id="main container">
+
               <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
-                <Route path='/createMeal' element={<CreateMenuItem />} />
+                <Route path='/menu' element={<MenuList />}>
+                  <Route path='createMeal' element={<CreateMenuItem />} />
+                  <Route path='editMeal/:id' element={<EditMenuItem />} />
+                </Route>
+
                 <Route path='/categories' element={<CategoriesList />}>
                   {/* TODO: Why do i need these two routes? */}
                   <Route path='createCategory' element={<CreateMenuCategory />} />
