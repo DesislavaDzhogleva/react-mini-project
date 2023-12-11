@@ -7,7 +7,8 @@ import styles from './Categories.module.css';
 import CreateMenuCategory from './CreateCategory';
 import EditMenuCategory from './EditCategory';
 import { useAuth } from '../../../hooks/useAuth';
-import {Unauthorized} from '../../Unauthorized/Unauthorized';
+import Unauthorized from '../../Unauthorized/Unauthorized';
+
 
 function CategoriesList() {
     const [categories, setCategories] = useState([]);

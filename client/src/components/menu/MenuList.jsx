@@ -1,25 +1,84 @@
-// import styles from './Menu.module.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
+import mealReducer from '../../reducers/mealReducer';
 import * as mealService from '../../services/mealService';
 import * as menuService from '../../services/mealService';
+import { ValidationErrors, ValidationRegexes } from '../../constants/commonConstants';
 import commonStyles from '../Site.module.css';
+import Unauthorized from '../Unauthorized/Unauthorized';
 import CreateMenuItem from './CreateMenuItem';
 import EditMenuItem from './EditMenuItem';
 import styles from './Menu.module.css';
 import MenuItem from './MenuItem';
-import Unauthorized from '../Unauthorized/Unauthorized';
+
+// const ValidationErrors = {
+//     emptyInput: "This field cannot be empty",
+//     inputNotNumber: "This field accepts only valid numbers"
+// }
+
+// const ValidationRegexes = {
+//     //Validates that the price is a positive double or decimal number
+//     priceRegex: new RegExp(/^(\d+(\.\d*)?|\.\d+)$/),
+// }
 
 function MenuList() {
     const [menuItems, setMenuItems] = useState([]);
     const { state } = useAuth();
-
     const navigate = useNavigate();
+    //TODO: How to not do this in this component?
+    const [menuItem, dispatch] = useReducer(mealReducer, {
+        mealImageError: "",
+        mealNameError: "",
+        mealDescriptionError: "",
+        mealPriceError: "",
+        categoryIdError: "",
+    })
+
     const onCreateMenuItem = async (menuItem) => {
-        const response = await mealService.create(menuItem);
-        setMenuItems([...menuItems, response]);
-        navigate('/menu');
+        let isValid = true;
+        Object.keys(menuItem).forEach((field) => {
+            if (field === 'mealPrice') {
+                if (validateNumberFields(field, menuItem[field]) === false) {
+                    isValid = false;
+                }
+            }
+            else {
+                if (validateTextFields(field, menuItem[field]) === false) {
+                    isValid = false;
+                }
+            }
+        });
+
+        if (isValid) {
+            const response = await mealService.create(menuItem);
+            setMenuItems([...menuItems, response]);
+            navigate('/menu');
+        }
+    }
+
+    const validateTextFields = (target, value) => {
+        if (value.trim() === "") {
+            dispatch({ type: `SET_${target.toUpperCase()}_ERROR`, payload: ValidationErrors.emptyInput });
+            return false;
+        }
+
+        dispatch({ type: `SET_${target.toUpperCase()}_ERROR`, payload: null });
+        return true;
+    }
+
+    const validateNumberFields = (target, value) => {
+        if (target === "mealPrice") {
+            if (!ValidationRegexes.priceRegex.test(value) || value.trim() === "") {
+                console.log('not valid price');
+                console.log(value);
+                dispatch({ type: `SET_${target.toUpperCase()}_ERROR`, payload: ValidationErrors.inputNotNumber });
+                return false;
+            }
+
+            dispatch({ type: `SET_${target.toUpperCase()}_ERROR`, payload: null });
+            return true;
+        }
     }
 
     const onEditMenuItem = async (e) => {
@@ -68,7 +127,7 @@ function MenuList() {
                 {state.isAuthenticated && (
                     <>
                         <Routes>
-                            <Route path='createMeal' element={<CreateMenuItem onCreateMenuItem={onCreateMenuItem} />} />
+                            <Route path='createMeal' element={<CreateMenuItem onCreateMenuItem={onCreateMenuItem} menuItem={menuItem} />} />
                             <Route path='editMeal/:id' element={<EditMenuItem onEditMenuItem={onEditMenuItem} />} />
                         </Routes>
 
