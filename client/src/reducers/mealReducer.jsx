@@ -1,6 +1,19 @@
 function mealReducer(state, action) {
 
     switch (action.type) {
+        case "SET__ID":
+            return { ...state, _id: action.payload, _idError: "" };
+        case "SET_MEALDESCRIPTION":
+            console.log( action.payload);
+            return { ...state, mealDescription: action.payload, mealDescriptionError: "" };
+        case "SET_MEALIMAGE":
+            return { ...state,  mealImage: action.payload, mealImageError: "" };
+        case "SET_MEALNAME":
+            return { ...state, mealName: action.payload, mealNameError: "" };
+        case "SET_MEALPRICE":
+            return { ...state, mealPrice: action.payload, mealPriceError: "" };
+        case "SET_CATEGORYID":
+            return { ...state, categoryId: action.payload, categoryIdError: "" };
         case "SET_MEALDESCRIPTION_ERROR":
             console.log( action.payload);
             return { ...state, mealDescriptionError: action.payload };
