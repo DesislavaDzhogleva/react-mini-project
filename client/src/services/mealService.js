@@ -1,27 +1,22 @@
 import * as request from '../libs/requests.js';
 const baseUrl = 'http://localhost:3030/data/meals';
 export const getAll = async (id) => {
-    // const query = new URLSearchParams({
-    //     load: `owner=ownerId:users`,
-    // });
 
+    console.log(id);
     const query = new URLSearchParams({
         where: `_ownerId="${id}"`,
     });
 
     const result = await request.get(`${baseUrl}/?${query}&sortBy=_createdOn desc`);
-    console.log(result);
     return result;
 };
 
 export const create = async (meal) => {
-    console.log(meal.mealImage);
     const result = await request.post(`${baseUrl}`, meal);
     return result;
 }
 
 export const edit = async (meal) => {
-    console.log(meal._id);
     const result = await request.put(`${baseUrl}/${meal._id}`, meal);
     return result;
 }
