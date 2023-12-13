@@ -15,6 +15,7 @@ import CreateMenuCategory from './components/menu/categories/CreateCategory';
 import EditMenuCategory from './components/menu/categories/EditCategory';
 import CreateMenuItem from './components/menu/CreateMenuItem';
 import EditMenuItem from './components/menu/EditMenuItem';
+import RestaurantList from './components/restaurants/RestaurantsList';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
+                <Route path='/restaurants' element={<RestaurantList />} />
                 <Route path='/menu' element={<MenuList />}>
                   <Route path='createMeal' element={<CreateMenuItem />} />
                   <Route path='editMeal/:id' element={<EditMenuItem />} />

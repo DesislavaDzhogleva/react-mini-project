@@ -26,6 +26,9 @@ export default function Header() {
                     {state.isAuthenticated && state?.user.role === 'Restaurant' && (
                         <Link to="/categories" className="nav-link text-white">Categories</Link>
                     )}
+                     {state.isAuthenticated && state?.user.role === 'Client' && (
+                        <Link to="/restaurants" className="nav-link text-white">Restaurants</Link>
+                    )}
                         <Link to="/menu" className="nav-link text-white">Menu</Link>
                 </Nav>
 
