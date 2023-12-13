@@ -1,57 +1,15 @@
 import React, { createContext, useEffect, useReducer } from 'react';
 import * as authService from '../services/authService.js';
 import { useNavigate } from 'react-router-dom';
+import authReducer from '../reducers/authReducer';
+import {InitialState, ACTIONS} from '../constants/authConstants';
 
-const initialState = {
-  isAuthenticated: false,
-  user: null,
-  role: null,
-};
-
-const ACTIONS = {
-  LOGIN: 'LOGIN',
-  LOGOUT: 'LOGOUT',
-  REGISTER: 'REGISTER',
-};
-
-const authReducer = (state, action) => {
-  switch (action.type) {
-    case ACTIONS.LOGIN:
-      return {
-        ...state,
-        isAuthenticated: true,
-        user: action.payload,
-        role: action.payload.role,
-      };
-    case ACTIONS.LOGOUT:
-      return {
-        ...state,
-        isAuthenticated: false,
-        user: null,
-        role: null,
-      };
-    case ACTIONS.REGISTER:
-      return {
-        ...state,
-        isAuthenticated: true,
-        user: action.payload,
-        role: action.payload.role,
-      };
-    default:
-      return state;
-  }
-};
-
-// Create the context
 export const AuthContext = createContext();
 
 // Create the AuthProvider component
 export const AuthProvider = ({ children }) => {
-  // useEffect(() => {
-  //   localStorage.removeItem('accessToken');
-  // }, []);
-  
-  const [state, dispatch] = useReducer(authReducer, initialState);
+ 
+  const [state, dispatch] = useReducer(authReducer, InitialState);
   const navigate = useNavigate();
 
   const login = async ({email, password}) => {
