@@ -1,3 +1,42 @@
+/**
+ * MenuItem Component Documentation
+ * 
+ * Overview:
+ * The `MenuItem` component is a React functional component responsible for rendering an individual menu item. It utilizes React Router for navigation and authentication using the `useAuth` hook.
+
+ * Dependencies:
+ * - React: Used for building the user interface.
+ * - React Bootstrap: Provides UI components for the application.
+ * - `categoriesService` module: Provides methods for interacting with categories.
+ * - `mealService` module: Provides methods for interacting with the menu items.
+
+ * Props:
+ * - item: Object representing the menu item to be rendered.
+ * - onMealDelete: Function to handle the deletion of the menu item.
+
+ * Rendering:
+ * The component renders a card containing details of the menu item, including the meal image, name, description, category, and price. It also includes conditional rendering based on the user's role.
+
+ * Styling:
+ * The component uses CSS modules for styling, including `Menu.module.css`.
+
+ * Child Components:
+ * None
+
+ * Navigation:
+ * The component uses React Router for navigation, including links for editing the menu item.
+
+ * State Management:
+ * The component uses the `useState` hook to manage the category name and the `useAuth` hook for managing authentication state.
+
+ * Error Handling:
+ * Errors from fetching categories are caught and logged to the console.
+
+ * Additional Notes:
+ * - The component assumes that the user's role is stored in the `state` object.
+ */
+
+
 import { useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';

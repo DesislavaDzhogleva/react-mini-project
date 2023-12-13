@@ -1,3 +1,32 @@
+/**
+ * CreateMenuItem Component Documentation
+ * 
+ * Overview:
+ * The `CreateMenuItem` component is a React functional component responsible for creating a new menu item. It utilizes React Router for navigation and authentication using the `useAuth` hook.
+
+ * Dependencies:
+ * - React: Used for building the user interface.
+ * - React Bootstrap: Provides UI components for the application.
+ * - `categoriesService` module: Provides methods for interacting with categories.
+ * - `mealService` module: Provides methods for interacting with the menu items.
+ * - `useAuth` hook: Used for managing authentication state.
+
+ * Props:
+ * - addMeals: Function to add the newly created menu item to the list of menu items.
+
+ * State Management:
+ * The component uses the `useReducer` hook to manage the state of the new menu item and the `useState` hook to manage the list of categories.
+
+ * Navigation:
+ * The component uses React Router for navigation, redirecting to the menu page after creating a new menu item.
+
+ * Error Handling:
+ * Errors from fetching categories and creating menu items are caught and logged to the console.
+
+ * Additional Notes:
+ * - The component assumes that the user's role is stored in the `state` object.
+ */
+
 import { useEffect, useReducer, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
