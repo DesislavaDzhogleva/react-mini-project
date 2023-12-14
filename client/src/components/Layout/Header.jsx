@@ -7,10 +7,28 @@ import NavItem from "react-bootstrap/esm/NavItem";
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useAuth } from "../../hooks/useAuth";
 import './Header.css';
+import CartModal from '../modal/Modal';
+import Cart from '../shoppingCart/Cart';
+import { useState } from "react";
+import {useCartContext} from '../../contexts/cartContext';
 
 export default function Header() {
     const { state } = useAuth();
-   
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const { cart } = useCartContext();
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const totalQty = cart.reduce((acc, item) => {
+        return acc + item.quantity
+      }, 0);
+
     return (
         <>
       <header id="header" className="fixed-top d-flex align-items-center">
@@ -36,8 +54,9 @@ export default function Header() {
                     <div className="nav navbar-nav navbar-right right-menu">
                         <button
                             type="button"
-                            className="cart-btn d-lg-flex">
-                            Cart <span className="total-count" />
+                            className="cart-btn d-lg-flex"
+                            onClick={openModal}>
+                            Cart <span className="total-count"> ({totalQty})</span>
                         </button>
                         <Link to="/reserve" className="book-a-table-btn d-none d-lg-flex">
                             Reserve a table
@@ -45,7 +64,12 @@ export default function Header() {
                     </div>
                 )}
             </div>
-        </header></>
+        </header>
+        {isModalOpen && (
+                <CartModal closeModal={closeModal}>
+                   <Cart closeModal={closeModal}/>
+                </CartModal>
+            )}</>
        
     );
 }

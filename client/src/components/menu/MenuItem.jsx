@@ -41,15 +41,17 @@ import { useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/esm/Button';
+import { Link } from 'react-router-dom';
+import { useCartContext } from '../../contexts/cartContext';
+import { useAuth } from '../../hooks/useAuth';
 import * as categoriesService from '../../services/categoriesService';
 import * as mealService from '../../services/mealService';
 import styles from './Menu.module.css';
-import { Link } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
 
 export default function MenuItem({ item, onMealDelete }) {
     const [categoryName, setCategoryName] = useState('');
     const { state } = useAuth();
+    const { cart, addOrEditCartItem } = useCartContext();
 
     useEffect(() => {
         categoriesService.getOne(item.categoryId)
@@ -57,7 +59,15 @@ export default function MenuItem({ item, onMealDelete }) {
             .catch(err => console.log(`error in categories - ${err.message}`));
     }, [item.categoryId]);
 
-
+    const onProductAddToCart = async (e) => {
+        e.preventDefault()
+        try {
+            addOrEditCartItem(item, 1);
+        }
+        catch (error) {
+            console.log("Error on onProductAddToCart - " + error.message);
+        }
+    }
 
     return (
         <>
@@ -81,13 +91,13 @@ export default function MenuItem({ item, onMealDelete }) {
                             </Card.Body>
 
                             <Button className={styles.disabledButton}>Price - {item.mealPrice} lv.</Button>
-                         </>
+                        </>
 
                     )}
                     {state?.user.role === 'Client' && (
                         <>
-                            <Button variant="primary">Add to Cart - {item.mealPrice} lv.</Button>
-                         </>
+                            <Button variant="primary" onClick={onProductAddToCart}>Add to Cart - {item.mealPrice} lv.</Button>
+                        </>
 
                     )}
                 </Card>

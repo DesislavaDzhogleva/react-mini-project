@@ -2,6 +2,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import Header from './components/layout/Header'
 import  { AuthProvider } from './contexts/authContext';
+import {CartProvider} from './contexts/cartContext';
 import TopBar from './components/layout/TopBar'
 import Home from './components/Home';
 import Login from './components/users/Login';
@@ -16,12 +17,14 @@ import EditMenuCategory from './components/menu/categories/EditCategory';
 import CreateMenuItem from './components/menu/CreateMenuItem';
 import EditMenuItem from './components/menu/EditMenuItem';
 import RestaurantList from './components/restaurants/RestaurantsList';
+import Cart from './components/shoppingCart/Cart';
 
 function App() {
 
   return (
     <>
      <AuthProvider>
+      <CartProvider>
         <TopBar />
         <Header />
         <section className="inner-page">
@@ -48,6 +51,7 @@ function App() {
               </main>
           </div>
         </section>
+        </CartProvider>
         </AuthProvider>
     </>
   )
