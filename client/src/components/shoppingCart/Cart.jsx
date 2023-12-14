@@ -40,7 +40,7 @@ function Cart({closeModal}){
                         ))}
                     </tbody>
                     </table>
-                    <div class="menu menu-content">
+                    <div className="menu menu-content">
 
                 <div className="menu-ingredients m-0">Total price: $
                     <span className="total-cart">{totalPrice}</span></div>

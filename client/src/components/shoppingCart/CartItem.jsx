@@ -1,13 +1,14 @@
 import { useCartContext } from '../../contexts/cartContext';
 import styles from './Cart.module.css';
 
+
 const CartItem = ({ item }) => {
     const { removeFromCart, addOrEditCartItem, setQty} = useCartContext();
    
     const onProductIncreaseQuantity= async (e) => {
         e.preventDefault()
         try {
-            addOrEditCartItem(item, 1);
+            await addOrEditCartItem(item, 1);
         }
         catch (error) {
            console.log("Error on increase quantity - " + error.message);
@@ -17,7 +18,7 @@ const CartItem = ({ item }) => {
     const onProductDecreaseQuantity= async (e) => {
         e.preventDefault()
         try {
-            addOrEditCartItem(item, -1);
+           await addOrEditCartItem(item, -1);
         }
         catch (error) {
            console.log("Error on decrease quantity - " + error.message);
@@ -27,7 +28,7 @@ const CartItem = ({ item }) => {
     const onProductInputChange = async (e) => {
         e.preventDefault()
         try {
-            setQty(item, parseInt(e.target.value, 10));
+            await setQty(item, parseInt(e.target.value, 10));
         }
         catch (error) {
           console.log("Error on input change - " + error.message);

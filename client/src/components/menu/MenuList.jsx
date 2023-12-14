@@ -73,6 +73,7 @@ function MenuList() {
             setRestaurant(pickedRestaurant);
         }
     }, [state?.user?._id]);
+    
     const updateMeals = (meal) => {
         setMenuItems(oldMenuItems => {
             const newMenuItems = oldMenuItems

@@ -62,7 +62,7 @@ export default function MenuItem({ item, onMealDelete }) {
     const onProductAddToCart = async (e) => {
         e.preventDefault()
         try {
-            addOrEditCartItem(item, 1);
+            await addOrEditCartItem(item, 1);
         }
         catch (error) {
             console.log("Error on onProductAddToCart - " + error.message);
