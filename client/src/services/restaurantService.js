@@ -15,3 +15,11 @@ export const getOne = async (id) => {
     const result = await request.get(`${baseUrl}?${id}`);
     return result;
 }
+
+export const getByOwner = async (id) => {
+    const query = new URLSearchParams({
+        where: `_ownerId="${id}"`,
+    }); 
+    const result = await request.get(`${baseUrl}?${query}`);
+    return result[0];
+}

@@ -90,13 +90,13 @@ export default function MenuItem({ item, onMealDelete }) {
                                 <button onClick={() => onMealDelete(item._id)} className={styles.button}>Delete</button>
                             </Card.Body>
 
-                            <Button className={styles.disabledButton}>Price - {item.mealPrice} lv.</Button>
+                            <Button className={styles.disabledButton}>Price - $ {item.mealPrice} </Button>
                         </>
 
                     )}
                     {state?.user.role === 'Client' && (
                         <>
-                            <Button variant="primary" onClick={onProductAddToCart}>Add to Cart - {item.mealPrice} lv.</Button>
+                            <Button variant="primary" onClick={onProductAddToCart}>Add to Cart - $ {item.mealPrice} </Button>
                         </>
 
                     )}

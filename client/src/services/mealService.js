@@ -24,6 +24,16 @@ export const getOne = async (id) => {
     return result;
 }
 
+export const getAllById = async (ids) => {
+    const stringRepresentation = ids.map(value => `"${value}"`).join(", ");
+    // const query = new URLSearchParams({
+    //     where: `_id IN ${stringRepresentation}"`,
+    // });
+
+    const result = await request.get(`${baseUrl}/?where=_id IN (${stringRepresentation})`);
+    return result;
+}
+
 export const remove = async (id) => {
     const response = await request.remove(`${baseUrl}/${id}`);
     return response;

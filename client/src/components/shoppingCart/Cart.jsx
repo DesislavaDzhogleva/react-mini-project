@@ -1,12 +1,45 @@
 import styles from './Cart.module.css';
 import { useCartContext } from '../../contexts/cartContext';
+import * as orderService from '../../services/ordersService'
 import CartItem from './CartItem';
+import { useNavigate } from 'react-router-dom';
 function Cart({closeModal}){
-    const { cart, addToCart, removeFromCart } = useCartContext();
-
+    const { cart, addToCart, removeFromCart, emptyCart } = useCartContext();
+    const navigate = useNavigate();
     const totalPrice = cart.reduce((acc, item) => {
         return acc + (item.mealPrice * item.quantity)
       }, 0);
+
+      const onSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const pickedRestaurant = localStorage.getItem('pickedRestaurant');
+            const mappedCart = cart.map(item => ({
+                mealName: item.mealName,
+                quantity: item.quantity,
+                price: parseFloat(item.mealPrice), // Assuming mealPrice is a string, convert it to a number if needed
+                totalPrice: parseFloat(item.totalPrice), // Same assumption as above
+                mealId: item.mealId,
+                pickedRestaurant: pickedRestaurant
+              }));
+
+              const cartWithPickedRestaurant = {
+                pickedRestaurant,
+                mappedCart,
+              };
+              
+
+            var response = await orderService.create(cartWithPickedRestaurant);
+            //TODO: How to do this actyally?
+            emptyCart();
+            closeModal();
+            navigate('/orderDetails/' + response._id);
+
+        }
+        catch (error) {
+            console.log("Error on submit - " + error.message);
+        }
+      }
 
     return (
         <div className={styles.cartModal}
@@ -53,7 +86,7 @@ function Cart({closeModal}){
                     onClick={closeModal}>
                         Close
                     </a>
-                    <button type="button" className="order-now cart-btn d-lg-flex">
+                    <button type="button" onClick={onSubmit} className="order-now cart-btn d-lg-flex">
                         Order Now
                     </button>
                 </div>

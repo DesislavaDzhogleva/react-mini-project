@@ -18,6 +18,8 @@ import CreateMenuItem from './components/menu/CreateMenuItem';
 import EditMenuItem from './components/menu/EditMenuItem';
 import RestaurantList from './components/restaurants/RestaurantsList';
 import Cart from './components/shoppingCart/Cart';
+import Orders from './components/orders/Orders';
+import OrderDetails from './components/orders/OrderDetails';
 
 function App() {
 
@@ -37,6 +39,8 @@ function App() {
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
                 <Route path='/restaurants' element={<RestaurantList />} />
+                <Route path='/orders' element={<Orders />} />
+                <Route path='/orderDetails/:id' element={<OrderDetails />} />
                 <Route path='/menu' element={<MenuList />}>
                   <Route path='createMeal' element={<CreateMenuItem />} />
                   <Route path='editMeal/:id' element={<EditMenuItem />} />
