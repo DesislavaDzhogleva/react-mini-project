@@ -7,11 +7,9 @@ export const commonService = (baseUrl) => {
         where: `_ownerId="${id}"`,
       });
       const result = await request.get(`${baseUrl}/?${query}`);
-      console.log(result);
       return result;
     },
     create: async (data) => {
-        console.log(data);
       const result = await request.post(`${baseUrl}`, data);
       return result;
     },

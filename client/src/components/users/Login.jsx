@@ -6,7 +6,6 @@ import { useAuth } from '../../hooks/useAuth';
 function Login() {
 
     const {login, state} = useAuth();
-    console.log('Login state: ' + state.isAuthenticated)
     
     //podavai nachalni stoinosti na formata, inache gyrmi
       const { values, onChange, onSubmit } = useForm({

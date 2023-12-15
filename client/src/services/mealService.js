@@ -1,8 +1,6 @@
 import * as request from '../libs/requests.js';
 const baseUrl = 'http://localhost:3030/data/meals';
 export const getAll = async (id) => {
-
-    console.log(id);
     const query = new URLSearchParams({
         where: `_ownerId="${id}"`,
     });

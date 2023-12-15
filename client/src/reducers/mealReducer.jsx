@@ -4,7 +4,6 @@ function mealReducer(state, action) {
         case "SET__ID":
             return { ...state, _id: action.payload, _idError: "" };
         case "SET_MEALDESCRIPTION":
-            console.log( action.payload);
             return { ...state, mealDescription: action.payload, mealDescriptionError: "" };
         case "SET_MEALIMAGE":
             return { ...state,  mealImage: action.payload, mealImageError: "" };
@@ -15,7 +14,6 @@ function mealReducer(state, action) {
         case "SET_CATEGORYID":
             return { ...state, categoryId: action.payload, categoryIdError: "" };
         case "SET_MEALDESCRIPTION_ERROR":
-            console.log( action.payload);
             return { ...state, mealDescriptionError: action.payload };
         case "SET_MEALIMAGE_ERROR":
             return { ...state,  mealImageError: action.payload };

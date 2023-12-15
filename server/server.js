@@ -1353,6 +1353,49 @@
     	}
     };
     var seedData = {
+    	cartItems: {
+    		"ae8bc314-c3d3-47ec-b0b1-c35adb3c1f0c": {
+    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+    			mealImage: "https://www.thespruceeats.com/thmb/lko3xX8clhOrC894t9Drb6MoiX0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/easy-and-hearty-vegetable-soup-99538-hero-01-1d3b936ff03144af95ddca7640259c11.jpg",
+    			mealName: "Checken Soup",
+    			mealDescription: "Chicken soup with vegetables",
+    			mealPrice: "8.50",
+    			categoryId: "0cd21349-3fe5-4f36-ac52-7669c654dddc",
+    			quantity: 1,
+    			mealId: "d61b1aad-1507-459c-badd-af4f23d723b8",
+    			totalPrice: 8.5,
+    			_createdOn: 1702583290711,
+    			_id: "ae8bc314-c3d3-47ec-b0b1-c35adb3c1f0c",
+    			_updatedOn: 1702583644163
+    		},
+    		"b4183ef2-cc47-49e8-b9c1-8c30863e75bc": {
+    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+    			mealName: "Bread",
+    			mealDescription: "Warm white bread with butter",
+    			mealPrice: "2.00",
+    			mealImage: "https://ichef.bbci.co.uk/food/ic/food_16x9_832/recipes/paul_hollywoods_crusty_83536_16x9.jpg",
+    			categoryId: "6a7e8d45-323d-43be-9446-22dc99561af9",
+    			quantity: 10,
+    			mealId: "215bdac6-1833-4af8-9a87-bc2ba827dafc",
+    			totalPrice: 20,
+    			_createdOn: 1702583315038,
+    			_id: "b4183ef2-cc47-49e8-b9c1-8c30863e75bc",
+    			_updatedOn: 1702583642691
+    		},
+    		"6b6478b5-6e45-4dff-987c-a5e2e15bdca7": {
+    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+    			mealName: "Salad",
+    			mealDescription: "Salad fwith chicken, iceberg, tomato and cucumber",
+    			mealPrice: "7.50",
+    			mealImage: "https://www.kitchensanctuary.com/wp-content/uploads/2021/06/Simple-Green-Salad-with-Vinaigrette-Square-FS-3241.jpg",
+    			categoryId: "0cd21349-3fe5-4f36-ac52-7669c654dddc",
+    			quantity: 2,
+    			mealId: "0eef8e8f-055a-4dcf-87e4-bc11b77ec86f",
+    			totalPrice: 15,
+    			_createdOn: 1702583724107,
+    			_id: "6b6478b5-6e45-4dff-987c-a5e2e15bdca7"
+    		}
+    	},
     	recipes: {
     		"3987279d-0ad4-4afb-8ca9-5b256ae3b298": {
     			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
@@ -1465,7 +1508,7 @@
     			_ownerId: "46ca22d8-719f-4855-af19-a3b90bbfc4b3",
     			mealName: "Salad",
     			mealDescription: "Salad fwith chicken, iceberg, tomato and cucumber",
-    			mealPrice: "7.99",
+    			mealPrice: "7.50",
     			mealImage: "https://www.kitchensanctuary.com/wp-content/uploads/2021/06/Simple-Green-Salad-with-Vinaigrette-Square-FS-3241.jpg",
     			categoryId: "0cd21349-3fe5-4f36-ac52-7669c654dddc",
     			_createdOn: 1702230132290,
@@ -1486,7 +1529,7 @@
     			mealImage: "https://www.thespruceeats.com/thmb/lko3xX8clhOrC894t9Drb6MoiX0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/easy-and-hearty-vegetable-soup-99538-hero-01-1d3b936ff03144af95ddca7640259c11.jpg",
     			mealName: "Checken Soup",
     			mealDescription: "Chicken soup with vegetables",
-    			mealPrice: "8.99",
+    			mealPrice: "8.50",
     			categoryId: "0cd21349-3fe5-4f36-ac52-7669c654dddc",
     			_createdOn: 1702291949437,
     			_id: "d61b1aad-1507-459c-badd-af4f23d723b8"

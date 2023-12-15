@@ -28,7 +28,6 @@ export const CartProvider = ({
 
         try {
             var repsonse = await cartService.edit(item);
-            console.log('response ' + JSON.stringify(item));
             return repsonse;
         }
         catch (error) {
@@ -52,8 +51,7 @@ export const CartProvider = ({
 
     const addOrEditCartItem = async (newItem, qty) => {
         // Check if the product is already in the cart
-        const existingItemIndex = cartItems.findIndex(item => item._id === newItem._id);
-
+        const existingItemIndex = cartItems.findIndex(item => item.mealId === newItem.mealId || item.mealId === newItem._id);
         if (existingItemIndex !== -1) {
             // Product already in the cart, update its quantity
             let updatedCart = [...cartItems];
@@ -68,7 +66,7 @@ export const CartProvider = ({
 
     const setQty = async (newItem, qty) => {
         // Check if the product is already in the cart
-        const existingItemIndex = cartItems.findIndex(item => item._id === newItem._id);
+        const existingItemIndex = cartItems.findIndex(item => item.mealId === newItem.mealId);
 
         if (existingItemIndex !== -1) {
             // Product already in the cart, update its quantity

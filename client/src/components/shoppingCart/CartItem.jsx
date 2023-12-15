@@ -43,7 +43,7 @@ const CartItem = ({ item }) => {
             <div className="input-group bg-transparent">
             <button
                 className="minus-item input-group-addon btn btn-secondary"
-                data-name={item.mealName} onClick={onProductDecreaseQuantity}>
+                data-name={item.mealName} onClick={onProductDecreaseQuantity} disabled={item.quantity <= 1}>
                -
             </button>
             <input
