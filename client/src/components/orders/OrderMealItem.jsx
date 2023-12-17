@@ -2,7 +2,6 @@
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/esm/Button';
-import { Link } from 'react-router-dom';
 import styles from '../menu/Menu.module.css';
 import * as mealsService from '../../services/mealService';
 import { useEffect, useState } from 'react';

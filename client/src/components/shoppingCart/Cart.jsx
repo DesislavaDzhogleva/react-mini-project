@@ -14,6 +14,9 @@ function Cart({closeModal}){
         e.preventDefault();
         try {
             const pickedRestaurant = localStorage.getItem('pickedRestaurant');
+            if(!pickedRestaurant){
+                navigate('/restaurants');
+            }
             const mappedCart = cart.map(item => ({
                 mealName: item.mealName,
                 quantity: item.quantity,

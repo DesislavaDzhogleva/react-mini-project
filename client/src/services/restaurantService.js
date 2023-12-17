@@ -12,8 +12,12 @@ export const create = async (restaurant) => {
 }
 
 export const getOne = async (id) => {
-    const result = await request.get(`${baseUrl}?${id}`);
-    return result;
+    const query = new URLSearchParams({
+        where: `_ownerId="${id}"`,
+    }); 
+
+    const result = await request.get(`${baseUrl}?${query}`);
+    return result[0];
 }
 
 export const getByOwner = async (id) => {
