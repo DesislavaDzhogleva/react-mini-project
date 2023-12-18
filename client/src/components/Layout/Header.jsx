@@ -25,8 +25,8 @@ export default function Header() {
         setIsModalOpen(false);
     };
 
-    const totalQty = cart.reduce((acc, item) => {
-        return acc + item.quantity
+    const totalQty = cart?.reduce((acc, item) => {
+        return acc + item?.quantity
       }, 0);
 
     return (

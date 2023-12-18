@@ -10,14 +10,16 @@ export const CartProvider = ({
     const { state } = useAuth();
     const [cartItems, setCartItems] = useState([]);
     const navigate = useNavigate();
+    // const [pickedRestaurant, setPickedRestaurant] = useState();
 
     useEffect(() => {
         (async () => {
             try {
                 const pickedRestaurant = localStorage.getItem('pickedRestaurant');
-                if(!pickedRestaurant){
+                if(!pickedRestaurant && state?.user?._id !== undefined){
                     navigate('/Restaurants');
                 }
+                // setPickedRestaurant(restaurant);
                 var response = await cartService.getCart(state?.user?._id, pickedRestaurant);
                 setCartItems(response);
             }
@@ -30,12 +32,14 @@ export const CartProvider = ({
 
     const setCart = async (pickedRestaurant) => {
         var response = await cartService.getCart(state?.user?._id, pickedRestaurant);
+        console.log('response in set cart '+ response)
         setCartItems(response);
     }
 
     const updateCart = async (item, qty) => {
         item.quantity += qty;
         item.totalPrice = item.mealPrice * item.quantity;
+        item.pickedRestaurant = localStorage.getItem('pickedRestaurant');
 
         try {
             var repsonse = await cartService.edit(item);
@@ -50,6 +54,7 @@ export const CartProvider = ({
         newItem.quantity = qty;
         newItem.mealId = newItem._id;
         newItem.totalPrice = newItem.mealPrice * newItem.quantity;
+        newItem.pickedRestaurant = localStorage.getItem('pickedRestaurant');
 
         try {
             var repsonse = await cartService.create(newItem);
@@ -62,7 +67,7 @@ export const CartProvider = ({
 
     const addOrEditCartItem = async (newItem, qty) => {
         // Check if the product is already in the cart
-        const existingItemIndex = cartItems.findIndex(item => item.mealId === newItem.mealId || item.mealId === newItem._id);
+        const existingItemIndex = cartItems?.findIndex(item => item.mealId === newItem.mealId || item.mealId === newItem._id);
         if (existingItemIndex !== -1) {
             // Product already in the cart, update its quantity
             let updatedCart = [...cartItems];
@@ -105,7 +110,9 @@ export const CartProvider = ({
         }
     }
 
-    const emptyCart = () => {
+    const emptyCart = async () => {
+        const restaurant = localStorage.getItem('pickedRestaurant');
+        await cartService.removeAll(state?.user?._id, restaurant);
         setCartItems([])
     }
 

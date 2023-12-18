@@ -3,10 +3,11 @@ import { useCartContext } from '../../contexts/cartContext';
 import * as orderService from '../../services/ordersService'
 import CartItem from './CartItem';
 import { useNavigate } from 'react-router-dom';
+
 function Cart({closeModal}){
-    const { cart, addToCart, removeFromCart, emptyCart } = useCartContext();
+    const { cart, emptyCart } = useCartContext();
     const navigate = useNavigate();
-    const totalPrice = cart.reduce((acc, item) => {
+    const totalPrice = cart?.reduce((acc, item) => {
         return acc + (item.mealPrice * item.quantity)
       }, 0);
 
@@ -17,7 +18,7 @@ function Cart({closeModal}){
             if(!pickedRestaurant){
                 navigate('/restaurants');
             }
-            
+
             const mappedCart = cart.map(item => ({
                 mealName: item.mealName,
                 quantity: item.quantity,

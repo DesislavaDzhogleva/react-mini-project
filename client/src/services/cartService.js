@@ -12,18 +12,33 @@ export const edit = async (cartItem) => {
 }
 
 export const getCart = async (id, restaurant) => {
+    if(!id || !restaurant){
+        return null;
+    }
     const query = new URLSearchParams({
-        where: `_ownerId="${id}"`
+        where: `_ownerId="${id}" AND pickedRestaurant="${restaurant}"`
     });
+    
+    const queryString = query.toString().replace(/\+/g, '%20');
 
-    const queryRestaurant = new URLSearchParams({
-        where: `pickedRestaurant="${restaurant}"`
-    });
-    const result = await request.get(`${baseUrl}/?${query}&${queryRestaurant}&sortBy=_createdOn desc`);
+    const result = await request.get(`${baseUrl}/?${queryString}&sortBy=_createdOn desc`);
     return result;
 }
 
 export const remove = async (id) => {
     const response = await request.remove(`${baseUrl}/${id}`);
+    return response;
+}
+
+export const removeAll = async (id, restaurantId) => {
+    const cartItems = await getCart(id, restaurantId);
+    const removeItemPromises = [];
+    
+    (cartItems).forEach(x => {
+        removeItemPromises.push(request.remove(`${baseUrl}/${x._id}`));
+    });
+
+    const response = await Promise.all(removeItemPromises);
+    
     return response;
 }
