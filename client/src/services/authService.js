@@ -17,8 +17,9 @@ export const register = async (email, password, role, firstName, lastName) => {
     localStorage.setItem('accessToken', result.accessToken);
     
     if(role === 'Restaurant'){
-        const restaurant = await restaurantService.create({restaurantName: firstName, _id: result._id});
-        console.log("Result in register " + JSON.stringify(restaurant));
+        const restaurant = await restaurantService.create({restaurantName: firstName});
+        localStorage.setItem('pickedRestaurant', restaurant._ownerId);
+
     }
     return result;
 }

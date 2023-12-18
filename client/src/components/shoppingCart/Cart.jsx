@@ -17,6 +17,7 @@ function Cart({closeModal}){
             if(!pickedRestaurant){
                 navigate('/restaurants');
             }
+            
             const mappedCart = cart.map(item => ({
                 mealName: item.mealName,
                 quantity: item.quantity,

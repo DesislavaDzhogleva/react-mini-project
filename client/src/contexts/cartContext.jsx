@@ -2,17 +2,23 @@ import { createContext, useContext, useState, useEffect } from "react";
 import * as cartService from '../services/cartService';
 import { useAuth } from '../hooks/useAuth';
 export const CartContext = createContext();
+import { useNavigate } from "react-router-dom";
 
 export const CartProvider = ({
     children
 }) => {
     const { state } = useAuth();
     const [cartItems, setCartItems] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         (async () => {
             try {
-                var response = await cartService.getCart(state?.user?._id);
+                const pickedRestaurant = localStorage.getItem('pickedRestaurant');
+                if(!pickedRestaurant){
+                    navigate('/Restaurants');
+                }
+                var response = await cartService.getCart(state?.user?._id, pickedRestaurant);
                 setCartItems(response);
             }
             catch (error) {
@@ -21,6 +27,11 @@ export const CartProvider = ({
         }
         )()
     }, [state?.user?._id]);
+
+    const setCart = async (pickedRestaurant) => {
+        var response = await cartService.getCart(state?.user?._id, pickedRestaurant);
+        setCartItems(response);
+    }
 
     const updateCart = async (item, qty) => {
         item.quantity += qty;
@@ -99,7 +110,7 @@ export const CartProvider = ({
     }
 
     return (
-        <CartContext.Provider value={{ cart: cartItems, setQty, removeFromCart, addOrEditCartItem, emptyCart }}>
+        <CartContext.Provider value={{ cart: cartItems, setQty, removeFromCart, addOrEditCartItem, emptyCart, setCart }}>
             {children}
         </CartContext.Provider>
     );

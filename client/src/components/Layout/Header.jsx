@@ -42,8 +42,12 @@ export default function Header() {
                 </div>
                 <Nav className="me-auto">
                     {state.isAuthenticated && state?.user.role === 'Restaurant' && (
-                        <Link to="/categories" className="nav-link text-white">Categories</Link>
+                        <>
+                            <Link to="/categories" className="nav-link text-white">Categories</Link>
+                            <Link to="/menu" className="nav-link text-white">Menu</Link>
+                        </>
                     )}
+                    
                     {(state.isAuthenticated && state?.user.role === 'Client') && (
                         <>
                             <Link to="/restaurants" className="nav-link text-white">Restaurants</Link>

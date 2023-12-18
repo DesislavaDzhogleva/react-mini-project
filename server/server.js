@@ -1363,6 +1363,7 @@
     			categoryId: "0cd21349-3fe5-4f36-ac52-7669c654dddc",
     			quantity: 1,
     			mealId: "d61b1aad-1507-459c-badd-af4f23d723b8",
+    			pickedRestaurant: "46ca22d8-719f-4855-af19-a3b90bbfc4b3",
     			totalPrice: 8.5,
     			_createdOn: 1702583290711,
     			_id: "ae8bc314-c3d3-47ec-b0b1-c35adb3c1f0c",
@@ -1377,6 +1378,7 @@
     			categoryId: "6a7e8d45-323d-43be-9446-22dc99561af9",
     			quantity: 10,
     			mealId: "215bdac6-1833-4af8-9a87-bc2ba827dafc",
+    			pickedRestaurant: "46ca22d8-719f-4855-af19-a3b90bbfc4b3",
     			totalPrice: 20,
     			_createdOn: 1702583315038,
     			_id: "b4183ef2-cc47-49e8-b9c1-8c30863e75bc",
@@ -1391,6 +1393,7 @@
     			categoryId: "0cd21349-3fe5-4f36-ac52-7669c654dddc",
     			quantity: 2,
     			mealId: "0eef8e8f-055a-4dcf-87e4-bc11b77ec86f",
+    			pickedRestaurant: "46ca22d8-719f-4855-af19-a3b90bbfc4b3",
     			totalPrice: 15,
     			_createdOn: 1702583724107,
     			_id: "6b6478b5-6e45-4dff-987c-a5e2e15bdca7"

@@ -29,6 +29,7 @@ This react project is a platform for Restaurants owners and their customers.  It
 ## Database
 
 It uses *oftuni practice server*for saving the data and managing data. [*https://github.com/softuni-practice-server/softuni-practice-server*]
+&nbsp;
 Data: 
 
 - **users** - holds the users (both Clients and Restaurants)

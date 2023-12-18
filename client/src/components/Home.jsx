@@ -56,7 +56,7 @@ export default function Home() {
     <div className="container" data-aos="fade-up">
       <div className="section-title">
         <h2>Why Us</h2>
-        <p>Why Choose Our Restaurant</p>
+        <p>Why Choose Our Platform</p>
       </div>
       <div className="row">
         <div className="col-lg-4">

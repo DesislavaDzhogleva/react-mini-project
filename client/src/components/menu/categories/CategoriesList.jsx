@@ -66,12 +66,6 @@ function CategoriesList() {
                 {state.isAuthenticated && state.user?.role ==='Restaurant' && (
                         <div className="container">
                         <ListGroup className="d-flex justify-content-between" data-bs-theme="dark">
-                            <ListGroup.Item className="d-flex justify-content-between">Test Category
-                                <div className="d-flex justify-content-between">
-                                    <button className={styles.secondaryButton}>Edit</button>
-                                    <button className={styles.secondaryButton}>Delete</button>
-                                </div>
-                            </ListGroup.Item>
                             {categories.map((category, index) => (
                                 <ListGroup.Item key={index} className="d-flex justify-content-between">{category?.categoryName}
                                     <div className="d-flex justify-content-between">

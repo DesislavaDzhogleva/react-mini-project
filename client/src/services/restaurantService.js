@@ -6,6 +6,11 @@ export const getAll = async () => {
     return result;
 };
 
+export const getFirst = async () => {
+    const result = await request.get(`${baseUrl}`);
+    return result[0];
+}; 
+
 export const create = async (restaurant) => {
     const result = await request.post(`${baseUrl}`, restaurant);
     return result;

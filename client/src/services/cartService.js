@@ -11,11 +11,15 @@ export const edit = async (cartItem) => {
     return result;
 }
 
-export const getCart = async (id) => {
+export const getCart = async (id, restaurant) => {
     const query = new URLSearchParams({
-        where: `_ownerId="${id}"`,
+        where: `_ownerId="${id}"`
     });
-    const result = await request.get(`${baseUrl}/?${query}&sortBy=_createdOn desc`);
+
+    const queryRestaurant = new URLSearchParams({
+        where: `pickedRestaurant="${restaurant}"`
+    });
+    const result = await request.get(`${baseUrl}/?${query}&${queryRestaurant}&sortBy=_createdOn desc`);
     return result;
 }
 

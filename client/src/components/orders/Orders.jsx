@@ -58,7 +58,7 @@ export default function Orders() {
                         <tr key={item.orderId}>
                             <td>{index + 1}</td>
                             <td>{item.restaurant}</td>
-                            <td>{item.totalPrice}</td>
+                            <td>$ {item.totalPrice}</td>
                             <td>{item.dateOfOrder}</td>
                             <td>
                                 <Link to={`/orderDetails/${item.orderId}`}>View Details</Link>
