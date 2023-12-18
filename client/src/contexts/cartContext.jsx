@@ -10,7 +10,7 @@ export const CartProvider = ({
     const { state } = useAuth();
     const [cartItems, setCartItems] = useState([]);
     const navigate = useNavigate();
-    // const [pickedRestaurant, setPickedRestaurant] = useState();
+    const [restaurant, setPickedRestaurant] = useState();
 
     useEffect(() => {
         (async () => {
@@ -19,7 +19,7 @@ export const CartProvider = ({
                 if(!pickedRestaurant && state?.user?._id !== undefined){
                     navigate('/Restaurants');
                 }
-                // setPickedRestaurant(restaurant);
+                setPickedRestaurant(pickedRestaurant);
                 var response = await cartService.getCart(state?.user?._id, pickedRestaurant);
                 setCartItems(response);
             }
@@ -32,14 +32,15 @@ export const CartProvider = ({
 
     const setCart = async (pickedRestaurant) => {
         var response = await cartService.getCart(state?.user?._id, pickedRestaurant);
-        console.log('response in set cart '+ response)
+        setPickedRestaurant(pickedRestaurant);
         setCartItems(response);
     }
 
     const updateCart = async (item, qty) => {
         item.quantity += qty;
         item.totalPrice = item.mealPrice * item.quantity;
-        item.pickedRestaurant = localStorage.getItem('pickedRestaurant');
+        // item.pickedRestaurant = localStorage.getItem('pickedRestaurant');
+        item.pickedRestaurant = restaurant;
 
         try {
             var repsonse = await cartService.edit(item);
@@ -54,8 +55,9 @@ export const CartProvider = ({
         newItem.quantity = qty;
         newItem.mealId = newItem._id;
         newItem.totalPrice = newItem.mealPrice * newItem.quantity;
-        newItem.pickedRestaurant = localStorage.getItem('pickedRestaurant');
-
+        newItem.pickedRestaurant = restaurant;
+        // newItem.pickedRestaurant = localStorage.getItem('pickedRestaurant');
+       
         try {
             var repsonse = await cartService.create(newItem);
             return repsonse;

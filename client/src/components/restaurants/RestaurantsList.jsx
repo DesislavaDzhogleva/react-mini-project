@@ -25,7 +25,7 @@ function RestaurantList() {
         setCart(restaurant);
         navigate('/menu');
     }
-
+    
     return (
         <section>
             {!state.isAuthenticated && (

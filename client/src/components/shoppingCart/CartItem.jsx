@@ -54,7 +54,7 @@ const CartItem = ({ item }) => {
                 onChange={onProductInputChange} />
             <button
                 className="plus-item btn btn-secondary input-group-addon"
-                data-name="Tuscan_Grilled" onClick={onProductIncreaseQuantity}>
+                data-name={item.mealName} onClick={onProductIncreaseQuantity}>
                 +
             </button>
             </div>
